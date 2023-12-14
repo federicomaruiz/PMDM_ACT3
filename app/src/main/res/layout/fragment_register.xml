@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="30dp"
+    tools:context=".ui.fragment.RegisterFragment">
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_marginTop="64dp"
+        style="@style/edit_text"
+        android:hint="@string/et_name"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/tv_title_create"
+        app:layout_constraintStart_toStartOf="@+id/tv_title_create"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_create" />
+
+    <TextView
+        android:id="@+id/tv_title_create"
+        style="@style/titles"
+        android:text="@string/register_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_register"
+        style="@style/button"
+        android:layout_marginTop="160dp"
+        app:cornerRadius="8dp"
+        android:text="@string/register_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/et_repeat_password"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_repeat_password"
+        app:layout_constraintTop_toBottomOf="@+id/et_repeat_password"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/et_password"
+        style="@style/edit_text"
+        android:hint="@string/et_passwd"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/et_name"
+        app:layout_constraintStart_toStartOf="@+id/et_name"
+        app:layout_constraintTop_toBottomOf="@+id/et_name" />
+
+    <EditText
+        android:id="@+id/et_repeat_password"
+        android:hint="@string/et_repeat_passwd"
+        android:inputType="textPassword"
+        style="@style/edit_text"
+        app:layout_constraintEnd_toEndOf="@+id/et_password"
+        app:layout_constraintStart_toStartOf="@+id/et_password"
+        app:layout_constraintTop_toBottomOf="@+id/et_password" />
+</androidx.constraintlayout.widget.ConstraintLayout>

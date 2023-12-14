@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Ideas</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="crear_cuenta">Crear cuenta</string>
+    <string name="register_title">Crear cuenta</string>
+    <string name="et_name">Nombre de usuario</string>
+    <string name="et_passwd">Contraseña</string>
+    <string name="et_repeat_passwd">Confirmar contraseña</string>
+    <string name="title_login">Login</string>
+    <string name="btn_acceder">Acceder</string>
+    <string name="menu_lista">Lista</string>
+    <string name="menu_cuenta">Cuenta</string>
+    <string name="btn_salir">Salir</string>
+    <string name="btn_eliminar">Eliminar</string>
+</resources>
