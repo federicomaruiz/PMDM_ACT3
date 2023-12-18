@@ -13,4 +13,6 @@
     <string name="menu_cuenta">Cuenta</string>
     <string name="btn_salir">Salir</string>
     <string name="btn_eliminar">Eliminar</string>
+    <string name="select_img">Seleccionar imagen</string>
+    <string name="save_idea">Guardar idea</string>
 </resources>

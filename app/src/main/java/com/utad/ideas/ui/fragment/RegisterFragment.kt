@@ -30,10 +30,8 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.btnRegister.setOnClickListener {
             createUser()
-
         }
     }
 
@@ -51,7 +49,6 @@ class RegisterFragment : Fragment() {
             }
             Toast.makeText(requireContext(), "Usuario creado", Toast.LENGTH_SHORT).show()
             findNavController().popBackStack() // Regreso a la ventana anterior para hacer login una vez que se creo el usuario
-
         }
     }
 

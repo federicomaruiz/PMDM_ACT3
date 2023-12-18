@@ -21,7 +21,7 @@ class IdeasAdapter :
     // Implemento funcion del adaptador asigna a cada item a un dato en concreto
     override fun onBindViewHolder(holder: IdeaListViewHolder, position: Int) {
         val item = getItem(position)
-        holder.binding.tvIdeaName.text = item.ideaName
+        //holder.binding.tvIdeaName.text = item.ideaName
     }
 
     // Creo la clase interna que va a tener el viewHolder que va  recibir el binding del item.xml (layout)

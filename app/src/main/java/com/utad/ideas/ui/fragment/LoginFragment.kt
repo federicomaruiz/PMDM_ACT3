@@ -98,29 +98,34 @@ class LoginFragment : Fragment() {
 
     private fun checkCredentials(isNameValid: Boolean?, isPasswordValid: Boolean?) {
         if (isNameValid == true && isPasswordValid == true) {
-            setUserLogged() // guardo que el usuario esta logeado
+            setUserLogged(true) // guardo que el usuario esta logeado
             goToHome()
         } else if (isNameValid != null && isNameValid!!) {
-            Toast.makeText(requireContext(), "Nombre invalido", Toast.LENGTH_SHORT).show()
-        } else if (isPasswordValid != null && isPasswordValid!!) {
-            Toast.makeText(requireContext(), "Contraseña incorrecta", Toast.LENGTH_SHORT)
-                .show()
+            lifecycleScope.launch(Dispatchers.Main) {
+                Toast.makeText(requireContext(), "Nombre invalido", Toast.LENGTH_SHORT).show()
+            }
 
+        } else if (isPasswordValid != null && isPasswordValid!!) {
+            lifecycleScope.launch(Dispatchers.Main) {
+                Toast.makeText(requireContext(), "Contraseña incorrecta", Toast.LENGTH_SHORT).show()
+            }
+        }else{
+            lifecycleScope.launch(Dispatchers.Main) {
+                Toast.makeText(requireContext(), "Datos incorrectos", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
     // Guardo la sesion que el usuario esta logeado
-    private fun setUserLogged() {
+    private fun setUserLogged(isLogged:Boolean) {
         lifecycleScope.launch(Dispatchers.IO) {
-            DataStoreManager.setUserLogged(requireContext())
+            DataStoreManager.setUserLogged(requireContext(),isLogged)
         }
     }
-
     private fun goToHome() {
         val intent = Intent(requireContext(), IdeasActivity::class.java)
         startActivity(intent)
 
     }
-
 
 }

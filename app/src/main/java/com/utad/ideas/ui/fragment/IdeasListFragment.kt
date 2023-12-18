@@ -40,6 +40,7 @@ class IdeasListFragment : Fragment() {
         adapter.submitList(list)
 
 
+
     }
 
 

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.datastore.core.DataStore
+import androidx.datastore.dataStore
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.lifecycleScope
@@ -22,13 +23,19 @@ import com.utad.ideas.databinding.FragmentUserDataBinding
 import com.utad.ideas.ui.activities.IdeasActivity
 import com.utad.ideas.ui.activities.MainActivity
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class UserDataFragment : Fragment() {
 
     private lateinit var _binding: FragmentUserDataBinding
     private val binding: FragmentUserDataBinding get() = _binding
+
+    private lateinit var user: String
+    private lateinit var passwd: String
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,39 +47,61 @@ class UserDataFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        saveDataUser()
         listenToExit()
         listenToDelete()
     }
 
-    private fun listenToDelete() {
-        binding.btnHomeDelete.setOnClickListener {
-            //lifecycleScope.launch(Dispatchers.IO) {
+    private fun saveDataUser() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            user = DataStoreManager.getUser(requireContext()).first()
+            passwd = "Contraseña " +  DataStoreManager.getPassword(requireContext()).first()
 
-            //booleanPreferencesKey("user_logged")
-            // DataStoreManager.setUserLogged(requireContext())
-            // TODO ir al login y eliminar el usuario isLogged DATA STORE
+            // Actualizar la interfaz de usuario en el hilo principal
+            withContext(Dispatchers.Main) {
+                setText()
+            }
         }
     }
 
-    //goToLogin()
-    /*  lifecycleScope.launch(Dispatchers.IO) {
-            DataStoreManager.setUserLogged(requireContext())
-            }
-        }    */
-
-
-private fun listenToExit() {
-    binding.btnHomeExit.setOnClickListener {
-        //goToLogin()
-        // TODO ir al login
+    private fun setText() {
+        binding.tvHomeName.text = user
+        binding.tvHomePasswd.text = passwd
     }
-}
 
+    private fun listenToDelete() {
+        binding.btnHomeDelete.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.IO) {
+                DataStoreManager.deleteUser(requireContext())
+                withContext(Dispatchers.Main) {
+                    goToLogin()
+                }
+                lifecycleScope.launch(Dispatchers.IO) {
 
-/*private fun goToLogin(){
-    val intent = Intent(requireContext(), MainActivity::class.java)
-    startActivity(intent)
-}*/
+                    DataStoreManager.deleteLogin(requireContext())
+                    withContext(Dispatchers.Main) {
+                        goToLogin()
+                    }
+                }
+            }
+        }
+    }
 
+    private fun listenToExit() {
+        binding.btnHomeExit.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.IO) {
+                DataStoreManager.deleteLogin(requireContext())
+                withContext(Dispatchers.Main) {
+                    goToLogin()
+                }
+            }
+        }
+    }
+
+    private fun goToLogin() {
+        val intent = Intent(requireContext(), MainActivity::class.java)
+        startActivity(intent)
+
+    }
 
 }

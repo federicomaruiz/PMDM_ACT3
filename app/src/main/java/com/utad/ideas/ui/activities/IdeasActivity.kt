@@ -1,5 +1,6 @@
 package com.utad.ideas.ui.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
@@ -20,6 +21,14 @@ class IdeasActivity : AppCompatActivity() {
         _binding = ActivityIdeasBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setBottomNavigation()
+        listenFloating()
+    }
+
+    private fun listenFloating() {
+        binding.btnFloating.setOnClickListener {
+            val intent = Intent(this, CreateActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setBottomNavigation() {

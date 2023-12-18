@@ -7,8 +7,11 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 
 // variable que va referenciar la DB para luego acceder
@@ -46,19 +49,32 @@ object DataStoreManager {
     }
 
     // "Credenciales" para saber si un usuario esta logeado y que vaya directo a la home
-    suspend fun setUserLogged(context: Context) {
+    suspend fun setUserLogged(context: Context, isLogged: Boolean) {
         val userLogged = booleanPreferencesKey("user_logged")
         context.dataStore.edit { editor ->
-            editor[userLogged] = true;
+            editor[userLogged] = isLogged;
         }
     }
 
-    suspend fun getIsUserLogged(context: Context):Flow<Boolean> {
+    suspend fun getIsUserLogged(context: Context): Flow<Boolean> {
         val userLogged = booleanPreferencesKey("user_logged")
         return context.dataStore.data.map { editor ->
             editor[userLogged] ?: false
         }
     }
 
+    suspend fun deleteLogin(context: Context) {
+        setUserLogged(context, false)
 
-}
+    }
+
+
+    suspend fun deleteUser(context: Context) {
+            context.dataStore.edit { editor ->
+                //Borrar datos individuales
+                editor.remove(stringPreferencesKey("user_name"))
+                editor.remove(stringPreferencesKey("password"))
+            }
+        }
+    }
+
