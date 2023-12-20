@@ -30,7 +30,8 @@ class IdeasListFragment : Fragment() {
 
     private val adapter = IdeasAdapter(
         { item: Ideas -> deleteItem(item) },
-        { itemId: Int -> goToDetail(itemId) }
+        { itemId: Int -> goToDetail(itemId) },
+        {  getIdeasFromDataBase() }
 
     )
 
@@ -68,9 +69,7 @@ class IdeasListFragment : Fragment() {
                 (requireActivity().application as MyApplication)
             val newList = application.dataBase.ideasDao().getAllIdeaList()
             withContext(Dispatchers.Main) {
-                Toast.makeText(requireContext(), "funciiona la funcion", Toast.LENGTH_SHORT)
                 adapter.submitList(newList)
-
             }
         }
     }

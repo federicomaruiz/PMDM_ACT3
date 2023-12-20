@@ -17,7 +17,8 @@ import kotlinx.coroutines.withContext
 
 class IdeasAdapter(
     val deleteItem: (item: Ideas) -> Unit,
-    val goToDetail: (itemId: Int) -> Unit
+    val goToDetail: (itemId: Int) -> Unit,
+    val getIdeasFromDataBase: () -> Unit
 ) : ListAdapter<Ideas, IdeasAdapter.IdeaListViewHolder>(IdeasListItemCallBack) {
 
     // Implemento funcion del adaptador tengo que inflar la vista (visible) va crear y actualizar la lista
@@ -36,7 +37,7 @@ class IdeasAdapter(
         holder.binding.tvListTime.text = item.time
         holder.binding.tvListPriority.text = item.priority
         setColors(item, holder)
-        holder.binding.btnDeleteIdea.setOnClickListener { deleteItem(item) }
+        holder.binding.btnDeleteIdea.setOnClickListener { deleteItem(item);getIdeasFromDataBase() }
         holder.binding.root.setOnClickListener { goToDetail(item.id) }
 
     }
