@@ -16,6 +16,7 @@ import com.utad.ideas.ui.activities.IdeasActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.properties.Delegates
 
 class LoginFragment : Fragment() {
@@ -33,7 +34,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkIsUserLogged()
+        checkUser()
 
         binding.btnGoToCreate.setOnClickListener {
             goToRegister()
@@ -43,11 +44,11 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun checkIsUserLogged() {
+    private fun checkUser() {
         lifecycleScope.launch(Dispatchers.IO) {
             DataStoreManager.getIsUserLogged(requireContext()).collect { isUserLogged ->
                 if (isUserLogged) {
-                    with(Dispatchers.Main) {
+                    withContext(Dispatchers.Main) {
                         goToHome()
                     }
                 }
@@ -56,42 +57,40 @@ class LoginFragment : Fragment() {
     }
 
     private fun doLogin() {
-        val name = binding.etLoginName.text.toString().trim()
-        val password = binding.etLoginPassword.text.toString().trim()
+        var name: String? = binding.etLoginName.text.toString().trim()
+        var passwordValue: String? = binding.etLoginPassword.text.toString().trim()
 
-        if (!name.isNullOrEmpty() && !password.isNullOrEmpty()) {
-            obtainUserAndPassword(name, password)
+        if (!name.isNullOrEmpty() && !passwordValue.isNullOrEmpty()) {
+
+            var isNameValid: Boolean? = null
+            var isPasswordValid: Boolean? = null
+
+            // En esta corrutina escucho el nombre de usuario, solo una cosa puede escuchar
+            lifecycleScope.launch(Dispatchers.IO) {
+                DataStoreManager.getUser(requireContext()).collect { user ->
+                    isNameValid = (user == name) // Si el nombre coincide me dara true
+                    checkCredentials(isNameValid, isPasswordValid)
+                    name = null
+
+                }
+            }
+            lifecycleScope.launch(Dispatchers.IO) {
+                DataStoreManager.getPassword(requireContext()).collect { password ->
+                    isPasswordValid =
+                        (password == passwordValue) // Si el nombre coincide me dara true
+                    checkCredentials(isNameValid, isPasswordValid)
+                    passwordValue = null
+                }
+            }
         } else {
-            Toast.makeText(requireContext(), "Rellenar todos los campos", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Rellenar todos los campos", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
     private fun goToRegister() {
         val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
         findNavController().navigate(action)
-    }
-
-
-    //  Recupero el nombre y la contraseña  de mi BD y compruebo si son iguales paso los valores a otra funcion
-
-    private fun obtainUserAndPassword(name: String, passwordParam: String) {
-
-        var isNameValid: Boolean? = null
-        var isPasswordValid: Boolean? = null
-
-        // En esta corrutina escucho el nombre de usuario, solo una cosa puede escuchar
-        lifecycleScope.launch(Dispatchers.IO) {
-            DataStoreManager.getUser(requireContext()).collect { user ->
-                isNameValid = user == name // Si el nombre coincide me dara true
-                checkCredentials(isNameValid, isPasswordValid)
-            }
-        }
-        lifecycleScope.launch(Dispatchers.IO) {
-            DataStoreManager.getPassword(requireContext()).collect { password ->
-                isPasswordValid = password == passwordParam // Si el nombre coincide me dara true
-                checkCredentials(isNameValid, isPasswordValid)
-            }
-        }
     }
 
     // Chequeo las credenciales que sean true
@@ -107,9 +106,10 @@ class LoginFragment : Fragment() {
 
         } else if (isPasswordValid != null && isPasswordValid!!) {
             lifecycleScope.launch(Dispatchers.Main) {
-                Toast.makeText(requireContext(), "Contraseña incorrecta", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Contraseña incorrecta", Toast.LENGTH_SHORT)
+                    .show()
             }
-        }else{
+        } else {
             lifecycleScope.launch(Dispatchers.Main) {
                 Toast.makeText(requireContext(), "Datos incorrectos", Toast.LENGTH_SHORT).show()
             }
@@ -117,11 +117,12 @@ class LoginFragment : Fragment() {
     }
 
     // Guardo la sesion que el usuario esta logeado
-    private fun setUserLogged(isLogged:Boolean) {
+    private fun setUserLogged(isLogged: Boolean) {
         lifecycleScope.launch(Dispatchers.IO) {
-            DataStoreManager.setUserLogged(requireContext(),isLogged)
+            DataStoreManager.setUserLogged(requireContext(), isLogged)
         }
     }
+
     private fun goToHome() {
         val intent = Intent(requireContext(), IdeasActivity::class.java)
         startActivity(intent)

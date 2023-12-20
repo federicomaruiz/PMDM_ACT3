@@ -13,7 +13,6 @@ import com.utad.ideas.room.model.Ideas
 import kotlinx.coroutines.flow.Flow
 
 
-
 // Interactuar con la  BD
 // Clase que interactua con las querys para realizar CONSULTAS o insertar datos
 @Dao
@@ -25,8 +24,8 @@ interface IdeasDao {
     @Insert
     fun saveManyIdeaList(ideas: List<Ideas>)
 
-    @Update
-    fun updateIdeaList(ideas: Ideas)
+    @Query("UPDATE Ideas SET time = :newTime, priority = :newPriority WHERE id = :ideaId")
+    fun updateIdeaTimeAndPriority(ideaId: Int, newTime: String, newPriority: String)
 
 
     @Query("SELECT * FROM ideas")
@@ -50,12 +49,6 @@ interface IdeasDao {
      */
    /*@Query("SELECT * FROM DetailTable WHERE ideaId = :id")
     fun getListItems(id: Int): Flow<List<Detail>>*/
-
-    @Delete
-    fun deleteItem(ideas: Ideas)
-
-    @Update
-    fun changeItemAdded(ideas: Ideas)
 
     /**
      * Si queremos hacer una consulta de dos tablas relacionadas, deberemos marcar esa Query como

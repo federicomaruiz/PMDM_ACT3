@@ -1,18 +1,24 @@
 package com.utad.ideas.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.utad.ideas.database.dataStore
 import com.utad.ideas.databinding.FragmentIdeasListBinding
 import com.utad.ideas.room.model.Ideas
 import com.utad.ideas.ui.adapters.IdeasAdapter
 import com.utad.ideas.ui.application.MyApplication
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -21,17 +27,12 @@ class IdeasListFragment : Fragment() {
     private lateinit var _binding: FragmentIdeasListBinding
     private val binding: FragmentIdeasListBinding get() = _binding
 
-    private var  id : Int = 0
 
+    private val adapter = IdeasAdapter(
+        { item: Ideas -> deleteItem(item) },
+        { itemId: Int -> goToDetail(itemId) }
 
-    private val adapter : IdeasAdapter = IdeasAdapter(
-          deleteItem = { item: Ideas -> deleteItem(item)},
-          goToDetail = { item: Ideas -> goToDetail(item)}
     )
-
-
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +46,6 @@ class IdeasListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setRecyclerView()
-
 
     }
 
@@ -68,13 +68,16 @@ class IdeasListFragment : Fragment() {
                 (requireActivity().application as MyApplication)
             val newList = application.dataBase.ideasDao().getAllIdeaList()
             withContext(Dispatchers.Main) {
+                Toast.makeText(requireContext(), "funciiona la funcion", Toast.LENGTH_SHORT)
                 adapter.submitList(newList)
+
             }
         }
     }
 
-    private fun goToDetail(item: Ideas){
-          id =  item.id
+    private fun goToDetail(itemId: Int) {
+        val action = IdeasListFragmentDirections.actionIdeasListFragmentToIdeaDetailFragment(itemId)
+        findNavController().navigate(action)
     }
 
     private fun deleteItem(item: Ideas) {
@@ -84,15 +87,15 @@ class IdeasListFragment : Fragment() {
             /** Através del Dao elimino el item que he recibido por parámetro en esta función*/
             application.dataBase.ideasDao().deleteList(item)
         }
-        getIdeasFromDataBase()
     }
 
-    private fun update(){
-        lifecycleScope.launch(Dispatchers.Main) {
 
-            }
+    suspend fun getIsUserLogged(context: Context): Flow<Boolean> {
+        val userLogged = booleanPreferencesKey("user_logged")
+        return context.dataStore.data.map { editor ->
+            editor[userLogged] ?: false
+        }
     }
-
 
 }
 

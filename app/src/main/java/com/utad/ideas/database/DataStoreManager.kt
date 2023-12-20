@@ -56,13 +56,6 @@ object DataStoreManager {
         }
     }
 
-    suspend fun getIsUserLogged(context: Context): Flow<Boolean> {
-        val userLogged = booleanPreferencesKey("user_logged")
-        return context.dataStore.data.map { editor ->
-            editor[userLogged] ?: false
-        }
-    }
-
     suspend fun deleteLogin(context: Context) {
         setUserLogged(context, false)
 
@@ -70,12 +63,19 @@ object DataStoreManager {
 
 
     suspend fun deleteUser(context: Context) {
-            context.dataStore.edit { editor ->
-                //Borrar datos individuales // mirar si borra todo
-                editor.clear()
-                //editor.remove(stringPreferencesKey("user_name"))
-                //editor.remove(stringPreferencesKey("password"))
-            }
+        context.dataStore.edit { editor ->
+            editor.clear()
+
         }
     }
+
+    suspend fun getIsUserLogged(context: Context): Flow<Boolean> {
+        val userLogged = booleanPreferencesKey("user_logged")
+        return context.dataStore.data.map { editor ->
+            editor[userLogged] ?: false
+        }
+    }
+
+
+}
 

@@ -17,18 +17,17 @@ import kotlinx.coroutines.withContext
 
 class IdeasAdapter(
     val deleteItem: (item: Ideas) -> Unit,
-    val goToDetail: (item: Ideas) -> Unit
-):
-
-    ListAdapter<Ideas, IdeasAdapter.IdeaListViewHolder>(IdeasListItemCallBack) {
+    val goToDetail: (itemId: Int) -> Unit
+) : ListAdapter<Ideas, IdeasAdapter.IdeaListViewHolder>(IdeasListItemCallBack) {
 
     // Implemento funcion del adaptador tengo que inflar la vista (visible) va crear y actualizar la lista
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IdeaListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemIdeaListBinding.inflate(inflater,parent,false)
+        val binding = ItemIdeaListBinding.inflate(inflater, parent, false)
         return IdeaListViewHolder(binding)
 
     }
+
     // Implemento funcion del adaptador asigna a cada item a un dato en concreto
     override fun onBindViewHolder(holder: IdeaListViewHolder, position: Int) {
         val item = getItem(position)
@@ -36,33 +35,32 @@ class IdeasAdapter(
         holder.binding.tvPlayedPosition.text = item.description
         holder.binding.tvListTime.text = item.time
         holder.binding.tvListPriority.text = item.priority
-        setColors(item,holder)
-        holder.binding.btnDeleteIdea.setOnClickListener { deleteItem(item)
+        setColors(item, holder)
+        holder.binding.btnDeleteIdea.setOnClickListener { deleteItem(item) }
+        holder.binding.root.setOnClickListener { goToDetail(item.id) }
 
-        }
+    }
 
-
-}
 
     private fun setColors(item: Ideas, holder: IdeaListViewHolder) {
-        if(item.priority == "Baja"){
+        if (item.priority == "Baja") {
             holder.binding.tvListPriority.backgroundTintList =
                 ColorStateList.valueOf(Color.parseColor("#BDECB6"))
-        }else if (item.priority == "Media"){
+        } else if (item.priority == "Media") {
             holder.binding.tvListPriority.backgroundTintList =
                 ColorStateList.valueOf(Color.parseColor("#FDFD96"))
-        }else if (item.priority == "Alta"){
+        } else if (item.priority == "Alta") {
             holder.binding.tvListPriority.backgroundTintList =
                 ColorStateList.valueOf(Color.parseColor("#FF6961"))
         }
 
-        if(item.time == "Pendiente"){
+        if (item.time == "Pendiente") {
             holder.binding.tvListTime.backgroundTintList =
                 ColorStateList.valueOf(Color.parseColor("#FF6961"))
-        }else if (item.time == "En progreso"){
+        } else if (item.time == "En progreso") {
             holder.binding.tvListTime.backgroundTintList =
                 ColorStateList.valueOf(Color.parseColor("#FDFD96"))
-        }else if (item.time == "Terminado"){
+        } else if (item.time == "Terminado") {
             holder.binding.tvListTime.backgroundTintList =
                 ColorStateList.valueOf(Color.parseColor("#BDECB6"))
         }

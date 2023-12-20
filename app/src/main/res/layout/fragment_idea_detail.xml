@@ -12,9 +12,10 @@
     tools:context=".ui.fragment.IdeaDetailFragment">
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="269dp"
-        android:layout_height="144dp"
+        android:id="@+id/iv_photo_detail"
+        android:layout_width="299dp"
+        android:layout_height="156dp"
+        android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -29,13 +30,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="8dp"
+        android:textSize="28dp"
+        android:textStyle="bold"
         android:gravity="center"
-        android:text="TextView"
+        android:hint="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/iv_photo_detail"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -43,7 +46,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="TextView"
+        android:hint="TextView"
+        android:textSize="18dp"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.134"
@@ -64,21 +69,21 @@
         app:layout_constraintVertical_bias="0.191">
 
         <CheckBox
-            android:id="@+id/checkBaja"
+            android:id="@+id/cbDetailBaja"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Baja" />
 
         <CheckBox
-            android:id="@+id/checkMedia"
+            android:id="@+id/cbDetailMedia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Media" />
 
         <CheckBox
-            android:id="@+id/checkAlta"
+            android:id="@+id/cbDetailAlta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -124,21 +129,21 @@
         app:layout_constraintVertical_bias="0.085">
 
         <CheckBox
-            android:id="@+id/checkBox7"
+            android:id="@+id/cbDetailPendiente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Pendiente" />
 
         <CheckBox
-            android:id="@+id/checkBox8"
+            android:id="@+id/cbDetailProgreso"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="En progreso" />
 
         <CheckBox
-            android:id="@+id/checkBox9"
+            android:id="@+id/cbDetailTerminado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -152,7 +157,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:text="Name"
+        android:hint="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.386"
@@ -164,7 +169,7 @@
         android:id="@+id/button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="Actualizar y regresar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/editTextText"
         app:layout_constraintStart_toStartOf="@+id/editTextText"
