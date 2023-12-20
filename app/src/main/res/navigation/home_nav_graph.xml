@@ -10,10 +10,23 @@
         android:id="@+id/ideasListFragment"
         android:name="com.utad.ideas.ui.fragment.IdeasListFragment"
         android:label="fragment_ideas_list"
-        tools:layout="@layout/fragment_ideas_list" />
+        tools:layout="@layout/fragment_ideas_list" >
+        <action
+            android:id="@+id/action_ideasListFragment_to_ideaDetailFragment"
+            app:destination="@id/ideaDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/userDataFragment"
         android:name="com.utad.ideas.ui.fragment.UserDataFragment"
         android:label="fragment_user_data"
         tools:layout="@layout/fragment_user_data" />
+    <fragment
+        android:id="@+id/ideaDetailFragment"
+        android:name="com.utad.ideas.ui.fragment.IdeaDetailFragment"
+        android:label="fragment_idea_detail"
+        tools:layout="@layout/fragment_idea_detail" >
+        <argument
+            android:name="itemId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

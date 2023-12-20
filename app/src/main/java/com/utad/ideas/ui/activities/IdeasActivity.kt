@@ -22,7 +22,10 @@ class IdeasActivity : AppCompatActivity() {
         setContentView(binding.root)
         setBottomNavigation()
         listenFloating()
+
     }
+
+
 
     private fun listenFloating() {
         binding.btnFloating.setOnClickListener {
@@ -58,6 +61,8 @@ class IdeasActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+
 
 
     }

@@ -1,6 +1,9 @@
 package com.utad.ideas.room.model
 
 
+import android.graphics.Bitmap
+import android.widget.ImageView
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -8,7 +11,13 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Ideas(
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val ideaName: String
+    val ideaName: String,
+    val description: String,
+    val time: String,
+    val priority: String,
+    @ColumnInfo(typeAffinity = ColumnInfo.BLOB )
+    val image: Bitmap
+
 )

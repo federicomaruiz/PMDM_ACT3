@@ -71,9 +71,10 @@ object DataStoreManager {
 
     suspend fun deleteUser(context: Context) {
             context.dataStore.edit { editor ->
-                //Borrar datos individuales
-                editor.remove(stringPreferencesKey("user_name"))
-                editor.remove(stringPreferencesKey("password"))
+                //Borrar datos individuales // mirar si borra todo
+                editor.clear()
+                //editor.remove(stringPreferencesKey("user_name"))
+                //editor.remove(stringPreferencesKey("password"))
             }
         }
     }

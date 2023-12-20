@@ -76,13 +76,7 @@ class UserDataFragment : Fragment() {
                 withContext(Dispatchers.Main) {
                     goToLogin()
                 }
-                lifecycleScope.launch(Dispatchers.IO) {
 
-                    DataStoreManager.deleteLogin(requireContext())
-                    withContext(Dispatchers.Main) {
-                        goToLogin()
-                    }
-                }
             }
         }
     }

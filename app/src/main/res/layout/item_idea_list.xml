@@ -32,8 +32,9 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/fondo_circular"
             android:padding="10dp"
-            android:text="TEXTOO"
-            android:textSize="8dp"
+            android:hint="TEXTOO"
+            android:textSize="16dp"
+            android:gravity="center"
             app:layout_constraintBottom_toTopOf="@+id/tv_played_position"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.576"
@@ -48,8 +49,9 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/fondo_circular"
             android:padding="10dp"
-            android:text="TEXTOO"
-            android:textSize="8dp"
+            android:hint="TEXTOO"
+            android:gravity="center"
+            android:textSize="16dp"
             app:layout_constraintBottom_toTopOf="@+id/tv_played_position"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.569"
@@ -71,7 +73,7 @@
             app:layout_constraintVertical_bias="0.14" />
 
         <Button
-            android:id="@+id/btn_delete_player"
+            android:id="@+id/btn_delete_idea"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="20dp"

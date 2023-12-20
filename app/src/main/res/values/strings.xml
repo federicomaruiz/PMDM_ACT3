@@ -15,4 +15,8 @@
     <string name="btn_eliminar">Eliminar</string>
     <string name="select_img">Seleccionar imagen</string>
     <string name="save_idea">Guardar idea</string>
+    <string name="dialog_denied_permission_title">Permiso denegado</string>
+    <string name="dialog_denied_permission_message">Es necesario que acceder a tus archivos para poder cargar una imagen. Por favor activa los permisos desde ajustes.</string>
+    <string name="dialog_denied_permission_button_text">Ir a ajustes</string>
+    <string name="dialog_denied_permission_button_negative_text">Cancelar</string>
 </resources>

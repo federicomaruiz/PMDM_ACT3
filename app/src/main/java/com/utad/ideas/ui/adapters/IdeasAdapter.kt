@@ -1,5 +1,7 @@
 package com.utad.ideas.ui.adapters
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -7,8 +9,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.utad.ideas.databinding.ItemIdeaListBinding
 import com.utad.ideas.room.model.Ideas
+import com.utad.ideas.ui.activities.IdeasActivity
+import com.utad.ideas.ui.application.MyApplication
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class IdeasAdapter :
+class IdeasAdapter(
+    val deleteItem: (item: Ideas) -> Unit,
+    val goToDetail: (item: Ideas) -> Unit
+):
+
     ListAdapter<Ideas, IdeasAdapter.IdeaListViewHolder>(IdeasListItemCallBack) {
 
     // Implemento funcion del adaptador tengo que inflar la vista (visible) va crear y actualizar la lista
@@ -21,7 +32,40 @@ class IdeasAdapter :
     // Implemento funcion del adaptador asigna a cada item a un dato en concreto
     override fun onBindViewHolder(holder: IdeaListViewHolder, position: Int) {
         val item = getItem(position)
-        //holder.binding.tvIdeaName.text = item.ideaName
+        holder.binding.tvName.text = item.ideaName
+        holder.binding.tvPlayedPosition.text = item.description
+        holder.binding.tvListTime.text = item.time
+        holder.binding.tvListPriority.text = item.priority
+        setColors(item,holder)
+        holder.binding.btnDeleteIdea.setOnClickListener { deleteItem(item)
+
+        }
+
+
+}
+
+    private fun setColors(item: Ideas, holder: IdeaListViewHolder) {
+        if(item.priority == "Baja"){
+            holder.binding.tvListPriority.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor("#BDECB6"))
+        }else if (item.priority == "Media"){
+            holder.binding.tvListPriority.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor("#FDFD96"))
+        }else if (item.priority == "Alta"){
+            holder.binding.tvListPriority.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor("#FF6961"))
+        }
+
+        if(item.time == "Pendiente"){
+            holder.binding.tvListTime.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor("#FF6961"))
+        }else if (item.time == "En progreso"){
+            holder.binding.tvListTime.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor("#FDFD96"))
+        }else if (item.time == "Terminado"){
+            holder.binding.tvListTime.backgroundTintList =
+                ColorStateList.valueOf(Color.parseColor("#BDECB6"))
+        }
     }
 
     // Creo la clase interna que va a tener el viewHolder que va  recibir el binding del item.xml (layout)
