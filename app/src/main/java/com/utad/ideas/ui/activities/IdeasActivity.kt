@@ -37,11 +37,6 @@ class IdeasActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(binding.nhfView.id) as NavHostFragment
         navController = navHostFragment.findNavController()
 
-        /*
-               if (navHostFragment != null) {
-                   binding.bnvNews.setupWithNavController(navController)
-               } */
-
         navController.navigate(R.id.ideasListFragment)
 
         binding.bnvNews.setOnNavigationItemSelectedListener { item ->
@@ -59,8 +54,6 @@ class IdeasActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
-
 
 
     }

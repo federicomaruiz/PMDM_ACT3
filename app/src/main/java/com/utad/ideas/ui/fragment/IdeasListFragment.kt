@@ -31,7 +31,7 @@ class IdeasListFragment : Fragment() {
     private val adapter = IdeasAdapter(
         { item: Ideas -> deleteItem(item) },
         { itemId: Int -> goToDetail(itemId) },
-        {  getIdeasFromDataBase() }
+        { getIdeasFromDataBase() }
 
     )
 
@@ -83,16 +83,7 @@ class IdeasListFragment : Fragment() {
         /** Accedo a la aplicacion a través de la activity y le hago un cast a nuestra clase que contiene la BD. */
         val application = requireActivity().application as MyApplication
         lifecycleScope.launch(Dispatchers.IO) {
-            /** Através del Dao elimino el item que he recibido por parámetro en esta función*/
             application.dataBase.ideasDao().deleteList(item)
-        }
-    }
-
-
-    suspend fun getIsUserLogged(context: Context): Flow<Boolean> {
-        val userLogged = booleanPreferencesKey("user_logged")
-        return context.dataStore.data.map { editor ->
-            editor[userLogged] ?: false
         }
     }
 

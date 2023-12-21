@@ -47,25 +47,27 @@ class IdeaDetailFragment : Fragment() {
         obtainDetailRelation(args.itemId)
         checkTime()
         checkPriority()
-        binding.button.setOnClickListener { updateValue();navigateToBack()}
-        binding.btnAddDescription.setOnClickListener { addDescription() }
+        binding.button.setOnClickListener { updateValue();navigateToBack() }
+        binding.btnAddDetail.setOnClickListener { addDescription() }
     }
-
 
     private fun addDescription() {
         val description = binding.etDetailDescription.text.toString()
-        historialIdeas += "\n" + description + "\n"
-        if(!description.isNullOrEmpty()){
+        if (!description.isNullOrEmpty()) {
+            historialIdeas += "\n" + description + "\n"
             binding.tvAddDescription.text = historialIdeas
             binding.etDetailDescription.text.clear()
+        } else {
+            Toast.makeText(requireContext(), "Campo vacio", Toast.LENGTH_SHORT).show()
         }
     }
 
 
-    private fun navigateToBack(){
+    private fun navigateToBack() {
         val action = IdeaDetailFragmentDirections.actionIdeaDetailFragmentToIdeasListFragment()
         findNavController().navigate(action)
     }
+
     private fun obtainDetailRelation(itemId: Int) {
         /** Accedo a la aplicacion a través de la activity y le hago un cast para que sea de tipo MyApplication*/
         val application: MyApplication = requireActivity().application as MyApplication
@@ -78,9 +80,28 @@ class IdeaDetailFragment : Fragment() {
                     binding.ivPhotoDetail.setImageBitmap(obj.image)
                     binding.tvDetailTitle.text = obj.ideaName
                     binding.tvDetailDescription.text = obj.description
+                    if (!obj.detail.isNullOrEmpty()) {
+                        binding.tvAddDescription.text = obj.detail
+                        historialIdeas = obj.detail
+                    }
+                    selectDefect(obj.priority, obj.time)
 
                 }
             }
+        }
+    }
+
+    private fun selectDefect(priority: String, time: String) {
+        when (priority) {
+            "Baja" -> binding.cbDetailBaja.isChecked = true
+            "Media" -> binding.cbDetailMedia.isChecked = true
+            "Alta" -> binding.cbDetailAlta.isChecked = true
+        }
+
+        when (time) {
+            "Pendiente" -> binding.cbDetailPendiente.isChecked = true
+            "En progreso" -> binding.cbDetailProgreso.isChecked = true
+            "Terminado" -> binding.cbDetailTerminado.isChecked = true
         }
     }
 
@@ -90,6 +111,12 @@ class IdeaDetailFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.IO) {
             application.dataBase.ideasDao()
                 .updateIdeaTimeAndPriority(args.itemId, timeValue, priorityValue)
+
+        }
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            application.dataBase.ideasDao()
+                .updateDetail(args.itemId, historialIdeas)
 
         }
     }

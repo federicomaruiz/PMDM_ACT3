@@ -33,18 +33,19 @@ class CreateActivity : AppCompatActivity() {
 
     private lateinit var timeValue: String
     private lateinit var priorityValue: String
-    private lateinit var photoValue : Bitmap
+    private lateinit var photoValue: Bitmap
 
     private var selectedPhoto: Bitmap? = null
 
-    private  val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){isGranted:Boolean ->
-        if(isGranted){
-            openGallery()
-        }else{
-            showPermissionDialog()
-        }
+    private val permissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (isGranted) {
+                openGallery()
+            } else {
+                showPermissionDialog()
+            }
 
-    }
+        }
 
     private var settingsLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -68,8 +69,8 @@ class CreateActivity : AppCompatActivity() {
                     selectedPhoto = convertUriToBitmap(selectedImage)
 
                     /** Esto es la previsualizaición. Con el BitMap(foto) que hemos obtenido, lo pntamos en la imageView*/
-                     binding.ivPhoto.setImageBitmap(selectedPhoto)
-                     photoValue = selectedPhoto!!
+                    binding.ivPhoto.setImageBitmap(selectedPhoto)
+                    photoValue = selectedPhoto!!
                 } else {
                     Toast.makeText(this, "OYE, NO HAY FOTO", Toast.LENGTH_SHORT).show()
                 }
@@ -77,6 +78,7 @@ class CreateActivity : AppCompatActivity() {
                 Toast.makeText(this, "OYE, NO HAY FOTO", Toast.LENGTH_SHORT).show()
             }
         }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityCreateBinding.inflate(layoutInflater)
@@ -94,13 +96,14 @@ class CreateActivity : AppCompatActivity() {
         val permission: String = getImagePermission()
         val isPermissionGranted: Boolean =
             ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
-        val shouldRequestRationale: Boolean = ActivityCompat.shouldShowRequestPermissionRationale(this,permission)
+        val shouldRequestRationale: Boolean =
+            ActivityCompat.shouldShowRequestPermissionRationale(this, permission)
 
-        if(isPermissionGranted){
+        if (isPermissionGranted) {
             openGallery()
-        }else if (shouldRequestRationale){
+        } else if (shouldRequestRationale) {
             showPermissionDialog()
-        }else{
+        } else {
             permissionLauncher.launch(permission)
         }
 
@@ -135,9 +138,6 @@ class CreateActivity : AppCompatActivity() {
         settingsLauncher.launch(intent)
     }
 
-    // endregion ----- PERMISOS
-
-    //region ----- GALERÍA
     private fun openGallery() {
         /**
          * Creamos un intent en el que le indicamos a Android que va a ser un intent de "selección", pick.
@@ -214,7 +214,7 @@ class CreateActivity : AppCompatActivity() {
 
     private fun saveInDataBase(name: String, description: String) {
         lifecycleScope.launch(Dispatchers.IO) {
-            val idea = Ideas(0, name, description, timeValue, priorityValue,null,photoValue )
+            val idea = Ideas(0, name, description, timeValue, priorityValue, null, photoValue)
             (application as MyApplication).dataBase.ideasDao().saveIdeaList(idea)
 
             withContext(Dispatchers.Main) {

@@ -55,7 +55,7 @@ class UserDataFragment : Fragment() {
     private fun saveDataUser() {
         lifecycleScope.launch(Dispatchers.IO) {
             user = DataStoreManager.getUser(requireContext()).first()
-            passwd = "Contraseña " +  DataStoreManager.getPassword(requireContext()).first()
+            passwd = "Contraseña " + DataStoreManager.getPassword(requireContext()).first()
 
             // Actualizar la interfaz de usuario en el hilo principal
             withContext(Dispatchers.Main) {

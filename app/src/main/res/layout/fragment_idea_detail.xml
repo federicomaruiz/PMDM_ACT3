@@ -172,7 +172,7 @@
                 android:layout_margin="8dp"
                 android:ems="10"
                 android:padding="8dp"
-                android:hint="descripcion"
+                android:hint="detalle"
                 android:inputType="text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -215,7 +215,7 @@
                     android:text="Actualizar y regresar" />
 
                 <Button
-                    android:id="@+id/btn_add_description"
+                    android:id="@+id/btn_add_detail"
                     android:layout_width="133dp"
                     android:layout_height="55dp"
                     android:backgroundTint="@color/btn_add"

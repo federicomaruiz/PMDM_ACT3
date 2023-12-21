@@ -60,7 +60,6 @@ object DataStoreManager {
 
     }
 
-
     suspend fun deleteUser(context: Context) {
         context.dataStore.edit { editor ->
             editor.clear()
@@ -74,7 +73,6 @@ object DataStoreManager {
             editor[userLogged] ?: false
         }
     }
-
 
 }
 

@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:context=".ui.fragment.UserDataFragment">
 
     <ImageView
@@ -55,24 +55,25 @@
         android:id="@+id/btn_home_exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:text="@string/btn_salir"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="@color/btn_color"
+        android:text="@string/btn_salir"
         app:icon="@drawable/ic_exit"
         app:iconGravity="end"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_home_passwd"
-        app:layout_constraintVertical_bias="0.129"
-        />
+        app:layout_constraintVertical_bias="0.129" />
 
     <Button
         android:id="@+id/btn_home_delete"
         android:layout_width="135dp"
         android:layout_height="45dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:text="@string/btn_eliminar"
         android:backgroundTint="@color/btn_color_delte"
+        android:text="@string/btn_eliminar"
         app:icon="@drawable/ic_delete"
         app:iconGravity="end"
         app:layout_constraintBottom_toBottomOf="parent"
