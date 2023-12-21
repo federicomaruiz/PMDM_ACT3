@@ -42,7 +42,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
-                android:hint="TextView"
+                android:hint="@string/titulo_hint"
                 android:textSize="28dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="8dp"
-                android:hint="TextView"
+                android:hint="@string/titulo_hint"
                 android:textSize="18dp"
                 android:textStyle="italic"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -85,21 +85,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Baja" />
+                    android:text="@string/baja" />
 
                 <CheckBox
                     android:id="@+id/cbDetailMedia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Media" />
+                    android:text="@string/media" />
 
                 <CheckBox
                     android:id="@+id/cbDetailAlta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Alta" />
+                    android:text="@string/alta" />
             </LinearLayout>
 
             <TextView
@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:text="Prioridad"
+                android:text="@string/prioridad"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.055"
@@ -122,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:text="Estado"
+                android:text="@string/estado"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.055"
@@ -147,21 +147,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Pendiente" />
+                    android:text="@string/prendiente" />
 
                 <CheckBox
                     android:id="@+id/cbDetailProgreso"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="En progreso" />
+                    android:text="@string/proceso" />
 
                 <CheckBox
                     android:id="@+id/cbDetailTerminado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Terminado" />
+                    android:text="@string/terminada" />
             </LinearLayout>
 
             <EditText
@@ -172,7 +172,7 @@
                 android:layout_margin="8dp"
                 android:ems="10"
                 android:padding="8dp"
-                android:hint="detalle"
+                android:hint="@string/detalle_hint"
                 android:inputType="text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -188,7 +188,7 @@
                 android:layout_margin="8dp"
                 android:layout_marginTop="8dp"
                 android:textSize="16dp"
-                android:hint="Texto"
+                android:hint="@string/detalle_hint"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -212,14 +212,14 @@
                     android:layout_width="198dp"
                     android:layout_height="55dp"
                     android:layout_marginEnd="8dp"
-                    android:text="Actualizar y regresar" />
+                    android:text="@string/btn_act_reg" />
 
                 <Button
                     android:id="@+id/btn_add_detail"
                     android:layout_width="133dp"
                     android:layout_height="55dp"
                     android:backgroundTint="@color/btn_add"
-                    android:text="Añadir"
+                    android:text="@string/btn_añadir"
                     android:textColorHighlight="#3E8022"
                     android:textColorLink="#4CAF50" />
             </LinearLayout>

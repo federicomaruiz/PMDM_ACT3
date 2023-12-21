@@ -86,7 +86,7 @@
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Prioridad"
+        android:text="@string/prioridad"
         android:layout_marginBottom="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/et_idea_description"
@@ -100,7 +100,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"
-        android:text="Estado"
+        android:text="@string/estado"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
         app:layout_constraintHorizontal_bias="0.0"
@@ -127,21 +127,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Baja" />
+            android:text="@string/baja" />
 
         <CheckBox
             android:id="@+id/cbMedia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Media" />
+            android:text="@string/media" />
 
         <CheckBox
             android:id="@+id/cbAlta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Alta" />
+            android:text="@string/alta" />
 
     </LinearLayout>
 
@@ -161,21 +161,21 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Pendiente" />
+            android:text="@string/prendiente" />
 
         <CheckBox
             android:id="@+id/cbProgreso"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="En progreso" />
+            android:text="@string/proceso" />
 
         <CheckBox
             android:id="@+id/cbTerminado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Terminado" />
+            android:text="@string/terminada" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

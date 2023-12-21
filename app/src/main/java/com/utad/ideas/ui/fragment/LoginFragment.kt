@@ -99,7 +99,7 @@ class LoginFragment : Fragment() {
         if (isNameValid == true && isPasswordValid == true) {
             setUserLogged(true) // guardo que el usuario esta logeado
             goToHome()
-        } else if (isNameValid == false && isPasswordValid == false) {
+        } else if (isNameValid == false || isPasswordValid == false) {
             lifecycleScope.launch(Dispatchers.Main) {
                 Toast.makeText(requireContext(), "Datos incorrectos", Toast.LENGTH_SHORT).show()
             }

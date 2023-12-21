@@ -19,4 +19,18 @@
     <string name="dialog_denied_permission_message">Es necesario que acceder a tus archivos para poder cargar una imagen. Por favor activa los permisos desde ajustes.</string>
     <string name="dialog_denied_permission_button_text">Ir a ajustes</string>
     <string name="dialog_denied_permission_button_negative_text">Cancelar</string>
+    <string name="prioridad">Prioridad</string>
+    <string name="estado">Estado</string>
+    <string name="baja">Baja</string>
+    <string name="media">Media</string>
+    <string name="alta">Alta</string>
+    <strisng name="proceso">En proceso</strisng>
+    <string name="prendiente">Pendiente</string>
+    <string name="terminada">Terminado</string>
+    <string name="titulo_hint">Titulo</string>
+    <string name="passwd_hint">Contraseña</string>
+    <string name="detalle_hint">Detalle</string>
+    <string name="btn_act_reg">Actualizar y regresar</string>
+    <string name="btn_añadir">Añadir</string>
+
 </resources>
