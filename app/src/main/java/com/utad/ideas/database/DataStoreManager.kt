@@ -30,7 +30,6 @@ object DataStoreManager {
         }
     }
 
-
     // Funcion para recuperar datos
 
     suspend fun getUser(context: Context): Flow<String> {

@@ -82,7 +82,7 @@ class LoginFragment : Fragment() {
                     passwordValue = null
                 }
             }
-        } else {
+        } else  {
             Toast.makeText(requireContext(), "Rellenar todos los campos", Toast.LENGTH_SHORT)
                 .show()
         }
@@ -99,17 +99,7 @@ class LoginFragment : Fragment() {
         if (isNameValid == true && isPasswordValid == true) {
             setUserLogged(true) // guardo que el usuario esta logeado
             goToHome()
-        } else if (isNameValid != null && isNameValid!!) {
-            lifecycleScope.launch(Dispatchers.Main) {
-                Toast.makeText(requireContext(), "Nombre invalido", Toast.LENGTH_SHORT).show()
-            }
-
-        } else if (isPasswordValid != null && isPasswordValid!!) {
-            lifecycleScope.launch(Dispatchers.Main) {
-                Toast.makeText(requireContext(), "Contraseña incorrecta", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        } else {
+        } else if (isNameValid == false && isPasswordValid == false){
             lifecycleScope.launch(Dispatchers.Main) {
                 Toast.makeText(requireContext(), "Datos incorrectos", Toast.LENGTH_SHORT).show()
             }

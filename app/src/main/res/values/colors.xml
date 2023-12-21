@@ -6,4 +6,6 @@
     <color name="et_color">#F3E4CD</color>
     <color name="btn_color">#976A27</color>
     <color name="btn_color_delte">#FB0505</color>
+    <color name="btn_add">#105913</color>
+
 </resources>

@@ -1,4 +1,4 @@
-package com.utad.ideas.room.model
+/*package com.utad.ideas.room.model
 
 import android.graphics.Bitmap
 import androidx.room.ColumnInfo
@@ -13,14 +13,7 @@ data class Detail(
     val id: Int,
     val ideaId: Int,
     val detailValue: String,
-    /**
-     * Con la notación Embedded podemos anidar objetos simples dentro de nuestra tabla
-     * */
-    @Embedded
-    val amount: Amount
+
 )
 
-data class Amount(
-    val amount: Int,
-    val unit: String
-)
+*/

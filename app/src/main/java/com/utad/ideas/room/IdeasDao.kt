@@ -7,8 +7,8 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
-import com.utad.ideas.room.model.Detail
-import com.utad.ideas.room.model.IdeaAndDetail
+//import com.utad.ideas.room.model.Detail
+//import com.utad.ideas.room.model.IdeaAndDetail
 import com.utad.ideas.room.model.Ideas
 import kotlinx.coroutines.flow.Flow
 
@@ -27,6 +27,8 @@ interface IdeasDao {
     @Query("UPDATE Ideas SET time = :newTime, priority = :newPriority WHERE id = :ideaId")
     fun updateIdeaTimeAndPriority(ideaId: Int, newTime: String, newPriority: String)
 
+    
+
 
     @Query("SELECT * FROM ideas")
     fun getAllIdeaList(): List<Ideas>
@@ -38,7 +40,6 @@ interface IdeasDao {
 /*    @Query("SELECT * FROM groceries WHERE id=:listId")
     fun getShoppingListDetail(listId: Int): Flow<Groceries>*/
 
-
     @Delete
     fun deleteList(ideas: Ideas)
 
@@ -47,8 +48,8 @@ interface IdeasDao {
      * Si usamos un flow para devolver los datos y tenerlos actualizados,
      * deberemos quitar el prefijo suspend de la función
      */
-   /*@Query("SELECT * FROM DetailTable WHERE ideaId = :id")
-    fun getListItems(id: Int): Flow<List<Detail>>*/
+     /*@Query("SELECT * FROM DetailTable WHERE ideaId = :id")
+     fun getListItems(id: Int): List<Detail>*/
 
     /**
      * Si queremos hacer una consulta de dos tablas relacionadas, deberemos marcar esa Query como

@@ -214,7 +214,7 @@ class CreateActivity : AppCompatActivity() {
 
     private fun saveInDataBase(name: String, description: String) {
         lifecycleScope.launch(Dispatchers.IO) {
-            val idea = Ideas(0, name, description, timeValue, priorityValue, photoValue )
+            val idea = Ideas(0, name, description, timeValue, priorityValue,null,photoValue )
             (application as MyApplication).dataBase.ideasDao().saveIdeaList(idea)
 
             withContext(Dispatchers.Main) {

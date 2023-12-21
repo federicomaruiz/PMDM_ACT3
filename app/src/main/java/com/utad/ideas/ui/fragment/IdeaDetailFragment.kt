@@ -32,6 +32,8 @@ class IdeaDetailFragment : Fragment() {
     private lateinit var timeValue: String
     private lateinit var priorityValue: String
 
+    private var historialIdeas: String = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -46,6 +48,17 @@ class IdeaDetailFragment : Fragment() {
         checkTime()
         checkPriority()
         binding.button.setOnClickListener { updateValue();navigateToBack()}
+        binding.btnAddDescription.setOnClickListener { addDescription() }
+    }
+
+
+    private fun addDescription() {
+        val description = binding.etDetailDescription.text.toString()
+        historialIdeas += "\n" + description + "\n"
+        if(!description.isNullOrEmpty()){
+            binding.tvAddDescription.text = historialIdeas
+            binding.etDetailDescription.text.clear()
+        }
     }
 
 
@@ -72,6 +85,7 @@ class IdeaDetailFragment : Fragment() {
     }
 
     private fun updateValue() {
+
         val application: MyApplication = requireActivity().application as MyApplication
         lifecycleScope.launch(Dispatchers.IO) {
             application.dataBase.ideasDao()

@@ -1,4 +1,4 @@
-package com.utad.ideas.room.model
+/*package com.utad.ideas.room.model
 
 import androidx.room.Embedded
 import androidx.room.Relation
@@ -14,3 +14,4 @@ data class IdeaAndDetail(
     val itemlist: List<Detail>
 
 )
+*/

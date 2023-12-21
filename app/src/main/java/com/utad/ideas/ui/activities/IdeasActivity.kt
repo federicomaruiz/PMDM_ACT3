@@ -25,8 +25,6 @@ class IdeasActivity : AppCompatActivity() {
 
     }
 
-
-
     private fun listenFloating() {
         binding.btnFloating.setOnClickListener {
             val intent = Intent(this, CreateActivity::class.java)
