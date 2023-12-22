@@ -205,8 +205,7 @@ class CreateActivity : AppCompatActivity() {
     private fun addNewIdea() {
         val name = binding.etIdeaName.text.toString().trim()
         val description = binding.etIdeaDescription.text.toString().trim()
-
-        if (areAllFieldsFilled()) {
+        if (checkAllFields()) {
             saveInDataBase(name, description)
         } else {
             Toast.makeText(this, "Completar todos los campos", Toast.LENGTH_SHORT).show()
@@ -215,7 +214,7 @@ class CreateActivity : AppCompatActivity() {
 
     private fun saveInDataBase(name: String, description: String) {
         lifecycleScope.launch(Dispatchers.IO) {
-            val idea = Ideas(0, name, description, timeValue, priorityValue,  photoValue)
+            val idea = Ideas(0, name, description, timeValue, priorityValue, photoValue)
             (application as MyApplication).dataBase.ideasDao().saveIdeaList(idea)
 
             withContext(Dispatchers.Main) {
@@ -279,12 +278,14 @@ class CreateActivity : AppCompatActivity() {
         }
     }
 
-    private fun areAllFieldsFilled(): Boolean {
+    private fun checkAllFields(): Boolean {
         val name = binding.etIdeaName.text.toString().trim()
         val description = binding.etIdeaDescription.text.toString().trim()
 
-        val isCheckBoxPrioritySelected = binding.cbBaja.isChecked || binding.cbMedia.isChecked || binding.cbAlta.isChecked
-        val isCheckBoxTimeSelected = binding.cbPendiente.isChecked || binding.cbProceso.isChecked || binding.cbTerminado.isChecked
+        val isCheckBoxPrioritySelected =
+            binding.cbBaja.isChecked || binding.cbMedia.isChecked || binding.cbAlta.isChecked
+        val isCheckBoxTimeSelected =
+            binding.cbPendiente.isChecked || binding.cbProceso.isChecked || binding.cbTerminado.isChecked
 
         return !(name.isEmpty() || description.isEmpty() || selectedPhoto == null || !isCheckBoxPrioritySelected || !isCheckBoxTimeSelected)
     }

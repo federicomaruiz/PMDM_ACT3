@@ -27,12 +27,9 @@ class IdeasListFragment : Fragment() {
     private lateinit var _binding: FragmentIdeasListBinding
     private val binding: FragmentIdeasListBinding get() = _binding
 
-
     private val adapter = IdeasAdapter(
         { item: Ideas -> deleteItem(item) },
-        { itemId: Int -> goToDetail(itemId) },
-        { getIdeasFromDataBase() }
-
+        { itemId: Int -> goToDetail(itemId) }
     )
 
     override fun onCreateView(
@@ -84,7 +81,11 @@ class IdeasListFragment : Fragment() {
         val application = requireActivity().application as MyApplication
         lifecycleScope.launch(Dispatchers.IO) {
             application.dataBase.ideasDao().deleteList(item)
+            withContext(Dispatchers.Main) {
+                getIdeasFromDataBase()
+            }
         }
+        adapter.notifyDataSetChanged() // Notifico que hubo cambios
     }
 
 }

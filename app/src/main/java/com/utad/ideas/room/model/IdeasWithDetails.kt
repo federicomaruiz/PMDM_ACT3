@@ -1,4 +1,5 @@
 import androidx.room.Embedded
+import androidx.room.ForeignKey.Companion.CASCADE
 import androidx.room.Relation
 import com.utad.ideas.room.model.Detail
 import com.utad.ideas.room.model.Ideas

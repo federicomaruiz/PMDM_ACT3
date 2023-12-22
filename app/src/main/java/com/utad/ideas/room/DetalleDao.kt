@@ -27,8 +27,5 @@ interface DetalleDao {
     @Delete
     fun deleteDetail(detail: Detail)
 
-    @Query("DELETE FROM Detail WHERE idIdeas = :ideaId")
-    fun deleteDetailsByIdeaId(ideaId: Int)
-
 
 }
