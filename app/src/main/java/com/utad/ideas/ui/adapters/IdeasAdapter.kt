@@ -56,7 +56,7 @@ class IdeasAdapter(
         if (item.time == "Pendiente") {
             holder.binding.tvListTime.backgroundTintList =
                 ColorStateList.valueOf(Color.parseColor("#FF6961"))
-        } else if (item.time == "En progreso") {
+        } else if (item.time == "En proceso") {
             holder.binding.tvListTime.backgroundTintList =
                 ColorStateList.valueOf(Color.parseColor("#FDFD96"))
         } else if (item.time == "Terminado") {
@@ -85,6 +85,4 @@ class IdeasAdapter(
             return oldItem.ideaName == newItem.ideaName
         }
     }
-
-
 }
