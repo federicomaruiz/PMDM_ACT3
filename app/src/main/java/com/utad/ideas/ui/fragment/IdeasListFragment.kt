@@ -44,12 +44,12 @@ class IdeasListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setRecyclerView()
-
     }
 
 
     override fun onResume() {
         super.onResume()
+        adapter.notifyDataSetChanged()
         getIdeasFromDataBase()
 
     }

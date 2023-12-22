@@ -85,4 +85,5 @@ class IdeasAdapter(
             return oldItem.ideaName == newItem.ideaName
         }
     }
+
 }

@@ -18,6 +18,7 @@ import com.utad.ideas.databinding.FragmentIdeasListBinding
 import com.utad.ideas.room.DetalleDao
 import com.utad.ideas.room.model.Detail
 import com.utad.ideas.room.model.Ideas
+import com.utad.ideas.ui.adapters.IdeasAdapter
 import com.utad.ideas.ui.application.MyApplication
 import com.utad.ideas.ui.fragment.IdeasListFragmentDirections.ActionIdeasListFragmentToIdeaDetailFragment
 import kotlinx.coroutines.Dispatchers
@@ -37,7 +38,6 @@ class IdeaDetailFragment : Fragment() {
 
     private lateinit var detailDao: DetalleDao
 
-    private var historialIdeas: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -62,7 +62,7 @@ class IdeaDetailFragment : Fragment() {
 
         if (!description.isNullOrEmpty()) {
             lifecycleScope.launch(Dispatchers.IO) {
-                val detail = Detail(0, idIdeas = args.itemId, detailText = description)
+                val detail = Detail(0, args.itemId,description)
                 detailDao.insertDetail(detail)
             }
             obtainDetailRelation(args.itemId)
@@ -92,8 +92,9 @@ class IdeaDetailFragment : Fragment() {
                     binding.tvDetailDescription.text = obj.description
                     selectDefect(obj.priority, obj.time)
 
-                    val detailsText = det.joinToString("\n") { it.detailText!! }
+                    val detailsText = det.joinToString("\n\n") { it.detailText!! }
                     binding.tvAddDescription.text = detailsText
+
 
                     // Crear una variable para almacenar el detalle antes de la lambda
                     var detailToDelete: Detail? = null
@@ -108,7 +109,6 @@ class IdeaDetailFragment : Fragment() {
                                 detailDao.deleteDetail(detail)
                             }
                         }
-
                         // Actualizar la vista después de eliminar el detalle
                         obtainDetailRelation(args.itemId)
                         true
@@ -154,66 +154,55 @@ class IdeaDetailFragment : Fragment() {
     private fun checkTime() {
         binding.cbDetailPendiente.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                if (!binding.cbDetailProceso.isChecked && !binding.cbDetailTerminado.isChecked) {
-                    // Solo actualizar si ningún otro CheckBox está seleccionado
-                    timeValue = binding.cbDetailPendiente.text.toString()
-                }
                 binding.cbDetailProceso.isChecked = false
                 binding.cbDetailTerminado.isChecked = false
+                timeValue = binding.cbDetailPendiente.text.toString()
             }
         }
 
         binding.cbDetailProceso.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                if (!binding.cbDetailPendiente.isChecked && !binding.cbDetailTerminado.isChecked) {
-                    timeValue = binding.cbDetailProceso.text.toString()
-                }
                 binding.cbDetailPendiente.isChecked = false
                 binding.cbDetailTerminado.isChecked = false
+                timeValue = binding.cbDetailProceso.text.toString()
             }
         }
 
         binding.cbDetailTerminado.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                if (!binding.cbDetailPendiente.isChecked && !binding.cbDetailProceso.isChecked) {
-                    timeValue = binding.cbDetailTerminado.text.toString()
-                }
                 binding.cbDetailPendiente.isChecked = false
                 binding.cbDetailProceso.isChecked = false
+                timeValue = binding.cbDetailTerminado.text.toString()
+
             }
+
         }
     }
 
     private fun checkPriority() {
         binding.cbDetailBaja.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                if (!binding.cbDetailMedia.isChecked && !binding.cbDetailAlta.isChecked) {
-                    priorityValue = binding.cbDetailBaja.text.toString()
-                }
                 binding.cbDetailMedia.isChecked = false
                 binding.cbDetailAlta.isChecked = false
+                priorityValue = binding.cbDetailBaja.text.toString()
             }
         }
 
         binding.cbDetailMedia.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                if (!binding.cbDetailBaja.isChecked && !binding.cbDetailAlta.isChecked) {
-                    priorityValue = binding.cbDetailMedia.text.toString()
-                }
                 binding.cbDetailBaja.isChecked = false
                 binding.cbDetailAlta.isChecked = false
+                priorityValue = binding.cbDetailMedia.text.toString()
             }
         }
 
         binding.cbDetailAlta.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                if (!binding.cbDetailBaja.isChecked && !binding.cbDetailMedia.isChecked) {
-                    priorityValue = binding.cbDetailAlta.text.toString()
-                }
                 binding.cbDetailBaja.isChecked = false
                 binding.cbDetailMedia.isChecked = false
+                priorityValue = binding.cbDetailAlta.text.toString()
             }
+
         }
     }
-
 }

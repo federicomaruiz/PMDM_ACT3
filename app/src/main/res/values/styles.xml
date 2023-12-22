@@ -26,10 +26,10 @@
         <item name="android:radius">12dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">32dp</item>
-        <item name="android:background">@color/et_color</item>
         <item name="android:ems">10</item>
         <item name="android:paddingStart">15dp</item>
         <item name="android:paddingTop">15dp</item>
         <item name="android:paddingBottom">15dp</item>
+        <item name="android:background">@drawable/rectangle</item>
     </style>
 </resources>
