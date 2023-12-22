@@ -83,6 +83,9 @@ dependencies {
     kapt("androidx.room:room-compiler:$room_version")
 
 
+    implementation ("com.google.code.gson:gson:2.8.8")
+
+
 
 
 

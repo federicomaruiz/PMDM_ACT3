@@ -24,12 +24,12 @@
     <string name="baja">Baja</string>
     <string name="media">Media</string>
     <string name="alta">Alta</string>
-    <strisng name="proceso">En proceso</strisng>
+    <string name="proceso">En proceso</string>
     <string name="prendiente">Pendiente</string>
-    <string name="terminada">Terminado</string>
+    <string name="terminado">Terminado</string>
     <string name="titulo_hint">Titulo</string>
     <string name="passwd_hint">Contraseña</string>
-    <string name="detalle_hint">Detalle</string>
+    <string name="detalle_hint">Añadire detalle</string>
     <string name="btn_act_reg">Actualizar y regresar</string>
     <string name="btn_añadir">Añadir</string>
 

@@ -17,7 +17,6 @@ data class Ideas(
     val description: String,
     val time: String,
     val priority: String,
-    val detail: String?,
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB )
     val image: Bitmap
 

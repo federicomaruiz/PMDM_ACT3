@@ -72,10 +72,10 @@ class CreateActivity : AppCompatActivity() {
                     binding.ivPhoto.setImageBitmap(selectedPhoto)
                     photoValue = selectedPhoto!!
                 } else {
-                    Toast.makeText(this, "OYE, NO HAY FOTO", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "NO HAY FOTO", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(this, "OYE, NO HAY FOTO", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "NO HAY FOTO", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -205,7 +205,8 @@ class CreateActivity : AppCompatActivity() {
     private fun addNewIdea() {
         val name = binding.etIdeaName.text.toString().trim()
         val description = binding.etIdeaDescription.text.toString().trim()
-        if (!name.isNullOrEmpty() && !description.isNullOrEmpty()) {
+
+        if (areAllFieldsFilled()) {
             saveInDataBase(name, description)
         } else {
             Toast.makeText(this, "Completar todos los campos", Toast.LENGTH_SHORT).show()
@@ -214,7 +215,7 @@ class CreateActivity : AppCompatActivity() {
 
     private fun saveInDataBase(name: String, description: String) {
         lifecycleScope.launch(Dispatchers.IO) {
-            val idea = Ideas(0, name, description, timeValue, priorityValue, null, photoValue)
+            val idea = Ideas(0, name, description, timeValue, priorityValue,  photoValue)
             (application as MyApplication).dataBase.ideasDao().saveIdeaList(idea)
 
             withContext(Dispatchers.Main) {
@@ -226,34 +227,26 @@ class CreateActivity : AppCompatActivity() {
     private fun checkValueTime() {
         binding.cbPendiente.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                binding.cbProgreso.isChecked = false
+                binding.cbProceso.isChecked = false
                 binding.cbTerminado.isChecked = false
                 timeValue = binding.cbPendiente.text.toString()
-                binding.btnSave.isEnabled = true
-            } else {
-                binding.btnSave.isEnabled = false
             }
         }
 
-        binding.cbProgreso.setOnCheckedChangeListener { _, isChecked ->
+        binding.cbProceso.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 binding.cbPendiente.isChecked = false
                 binding.cbTerminado.isChecked = false
-                timeValue = binding.cbProgreso.text.toString()
-                binding.btnSave.isEnabled = true
-            } else {
-                binding.btnSave.isEnabled = false
+                timeValue = binding.cbProceso.text.toString()
             }
         }
 
         binding.cbTerminado.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 binding.cbPendiente.isChecked = false
-                binding.cbProgreso.isChecked = false
+                binding.cbProceso.isChecked = false
                 timeValue = binding.cbTerminado.text.toString()
-                binding.btnSave.isEnabled = true
-            } else {
-                binding.btnSave.isEnabled = false
+
             }
 
         }
@@ -265,9 +258,6 @@ class CreateActivity : AppCompatActivity() {
                 binding.cbMedia.isChecked = false
                 binding.cbAlta.isChecked = false
                 priorityValue = binding.cbBaja.text.toString()
-                binding.btnSave.isEnabled = true
-            } else {
-                binding.btnSave.isEnabled = false
             }
         }
 
@@ -276,9 +266,6 @@ class CreateActivity : AppCompatActivity() {
                 binding.cbBaja.isChecked = false
                 binding.cbAlta.isChecked = false
                 priorityValue = binding.cbMedia.text.toString()
-                binding.btnSave.isEnabled = true
-            } else {
-                binding.btnSave.isEnabled = false
             }
         }
 
@@ -287,12 +274,19 @@ class CreateActivity : AppCompatActivity() {
                 binding.cbBaja.isChecked = false
                 binding.cbMedia.isChecked = false
                 priorityValue = binding.cbAlta.text.toString()
-                binding.btnSave.isEnabled = true
-            } else {
-                binding.btnSave.isEnabled = false
             }
 
         }
+    }
+
+    private fun areAllFieldsFilled(): Boolean {
+        val name = binding.etIdeaName.text.toString().trim()
+        val description = binding.etIdeaDescription.text.toString().trim()
+
+        val isCheckBoxPrioritySelected = binding.cbBaja.isChecked || binding.cbMedia.isChecked || binding.cbAlta.isChecked
+        val isCheckBoxTimeSelected = binding.cbPendiente.isChecked || binding.cbProceso.isChecked || binding.cbTerminado.isChecked
+
+        return !(name.isEmpty() || description.isEmpty() || selectedPhoto == null || !isCheckBoxPrioritySelected || !isCheckBoxTimeSelected)
     }
 
 }

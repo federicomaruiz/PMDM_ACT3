@@ -164,7 +164,7 @@
             android:text="@string/prendiente" />
 
         <CheckBox
-            android:id="@+id/cbProgreso"
+            android:id="@+id/cbProceso"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -175,7 +175,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/terminada" />
+            android:text="@string/terminado" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

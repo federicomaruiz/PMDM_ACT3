@@ -24,6 +24,9 @@ class LoginFragment : Fragment() {
     private lateinit var _binding: FragmentLoginBinding
     private val binding: FragmentLoginBinding get() = _binding
 
+
+    private var userLogged: Boolean = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,6 +51,7 @@ class LoginFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.IO) {
             DataStoreManager.getIsUserLogged(requireContext()).collect { isUserLogged ->
                 if (isUserLogged) {
+                    userLogged = true
                     withContext(Dispatchers.Main) {
                         goToHome()
                     }
@@ -64,14 +68,13 @@ class LoginFragment : Fragment() {
 
             var isNameValid: Boolean? = null
             var isPasswordValid: Boolean? = null
-
             // En esta corrutina escucho el nombre de usuario, solo una cosa puede escuchar
             lifecycleScope.launch(Dispatchers.IO) {
                 DataStoreManager.getUser(requireContext()).collect { user ->
                     isNameValid = (user == name) // Si el nombre coincide me dara true
                     checkCredentials(isNameValid, isPasswordValid)
                     name = null
-
+                    showMessageUser(isNameValid!!)
                 }
             }
             lifecycleScope.launch(Dispatchers.IO) {
@@ -80,6 +83,7 @@ class LoginFragment : Fragment() {
                         (password == passwordValue) // Si el nombre coincide me dara true
                     checkCredentials(isNameValid, isPasswordValid)
                     passwordValue = null
+                    showMessagePasswd(isPasswordValid!!)
                 }
             }
         } else {
@@ -88,9 +92,31 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun goToRegister() {
-        val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
-        findNavController().navigate(action)
+    private fun showMessageUser(isNameValid: Boolean) {
+        if ((isNameValid != null && !isNameValid!!) && (!userLogged)) {
+            lifecycleScope.launch(Dispatchers.Main) {
+                Toast.makeText(
+                    requireContext(),
+                    "Nombre no válido",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            userLogged = false
+        }
+    }
+
+    private fun showMessagePasswd(isPasswordValid: Boolean) {
+        if ((isPasswordValid != null && !isPasswordValid!!) && (!userLogged)) {
+            lifecycleScope.launch(Dispatchers.Main) {
+                Toast.makeText(
+                    requireContext(),
+                    "Contraseña no válida",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            userLogged = false
+        }
     }
 
     // Chequeo las credenciales que sean true
@@ -98,12 +124,15 @@ class LoginFragment : Fragment() {
     private fun checkCredentials(isNameValid: Boolean?, isPasswordValid: Boolean?) {
         if (isNameValid == true && isPasswordValid == true) {
             setUserLogged(true) // guardo que el usuario esta logeado
+            userLogged = true
             goToHome()
-        } else if (isNameValid == false || isPasswordValid == false) {
-            lifecycleScope.launch(Dispatchers.Main) {
-                Toast.makeText(requireContext(), "Datos incorrectos", Toast.LENGTH_SHORT).show()
-            }
         }
+
+    }
+
+    private fun goToRegister() {
+        val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
+        findNavController().navigate(action)
     }
 
     // Guardo la sesion que el usuario esta logeado
