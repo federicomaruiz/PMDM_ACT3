@@ -7,8 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import com.utad.ideas.room.model.Ideas
-
-
+import kotlinx.coroutines.flow.Flow
 
 
 // Interactuar con la  BD
@@ -23,8 +22,7 @@ interface IdeasDao {
     fun updateIdeaTimeAndPriority(ideaId: Int, newTime: String, newPriority: String)
 
     @Query("SELECT * FROM ideas")
-    fun getAllIdeaList(): List<Ideas>
-
+    fun getAllIdeaList(): Flow <List<Ideas>>
 
     @Query("SELECT * FROM Ideas WHERE id=:listId")
     fun getIdeaListDetail(listId: Int): Ideas

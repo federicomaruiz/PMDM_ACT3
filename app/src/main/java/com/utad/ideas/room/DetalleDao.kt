@@ -8,6 +8,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.utad.ideas.room.model.Detail
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DetalleDao {

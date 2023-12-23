@@ -35,7 +35,6 @@ class IdeaDetailFragment : Fragment() {
 
     private lateinit var timeValue: String
     private lateinit var priorityValue: String
-
     private lateinit var detailDao: DetalleDao
 
 
@@ -62,9 +61,9 @@ class IdeaDetailFragment : Fragment() {
 
         if (!description.isNullOrEmpty()) {
             lifecycleScope.launch(Dispatchers.IO) {
-                val detail = Detail(0, args.itemId,description)
+                val detail = Detail(0, args.itemId, description)
                 detailDao.insertDetail(detail)
-                withContext(Dispatchers.Main){
+                withContext(Dispatchers.Main) {
                     Toast.makeText(requireContext(), "Añadido", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -110,8 +109,12 @@ class IdeaDetailFragment : Fragment() {
                             // Verificar si hay un detalle para eliminar
                             detailToDelete?.let { detail ->
                                 detailDao.deleteDetail(detail)
-                                withContext(Dispatchers.Main){
-                                    Toast.makeText(requireContext(),"Ha sido eliminado",Toast.LENGTH_SHORT).show()
+                                withContext(Dispatchers.Main) {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Ha sido eliminado",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
                             }
                         }

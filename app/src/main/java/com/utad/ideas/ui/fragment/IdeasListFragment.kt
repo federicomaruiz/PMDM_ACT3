@@ -44,15 +44,9 @@ class IdeasListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setRecyclerView()
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-        adapter.notifyDataSetChanged()
         getIdeasFromDataBase()
-
     }
+
 
     private fun setRecyclerView() {
         binding.rvIdeasList.layoutManager =
@@ -61,12 +55,10 @@ class IdeasListFragment : Fragment() {
     }
 
     private fun getIdeasFromDataBase() {
-        lifecycleScope.launch(Dispatchers.IO) {
-            val application =
-                (requireActivity().application as MyApplication)
-            val newList = application.dataBase.ideasDao().getAllIdeaList()
-            withContext(Dispatchers.Main) {
-                adapter.submitList(newList)
+        lifecycleScope.launch(Dispatchers.Main) {
+            val application = requireActivity().application as MyApplication
+            application.dataBase.ideasDao().getAllIdeaList().collect { ideasList ->
+                adapter.submitList(ideasList)
             }
         }
     }
@@ -77,15 +69,10 @@ class IdeasListFragment : Fragment() {
     }
 
     private fun deleteItem(item: Ideas) {
-        /** Accedo a la aplicacion a través de la activity y le hago un cast a nuestra clase que contiene la BD. */
         val application = requireActivity().application as MyApplication
         lifecycleScope.launch(Dispatchers.IO) {
             application.dataBase.ideasDao().deleteList(item)
-            withContext(Dispatchers.Main) {
-                getIdeasFromDataBase()
-            }
         }
-        adapter.notifyDataSetChanged() // Notifico que hubo cambios
     }
 
 }
