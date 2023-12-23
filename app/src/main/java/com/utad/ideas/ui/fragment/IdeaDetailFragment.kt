@@ -64,6 +64,9 @@ class IdeaDetailFragment : Fragment() {
             lifecycleScope.launch(Dispatchers.IO) {
                 val detail = Detail(0, args.itemId,description)
                 detailDao.insertDetail(detail)
+                withContext(Dispatchers.Main){
+                    Toast.makeText(requireContext(), "Añadido", Toast.LENGTH_SHORT).show()
+                }
             }
             obtainDetailRelation(args.itemId)
             binding.etDetailDescription.text.clear()
@@ -107,6 +110,9 @@ class IdeaDetailFragment : Fragment() {
                             // Verificar si hay un detalle para eliminar
                             detailToDelete?.let { detail ->
                                 detailDao.deleteDetail(detail)
+                                withContext(Dispatchers.Main){
+                                    Toast.makeText(requireContext(),"Ha sido eliminado",Toast.LENGTH_SHORT).show()
+                                }
                             }
                         }
                         // Actualizar la vista después de eliminar el detalle

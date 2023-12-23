@@ -21,7 +21,7 @@
     <TextView
         android:id="@+id/tv_title_create"
         style="@style/titles"
-        android:text="@string/register_title"
+        android:text="@string/crear_cuenta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
         style="@style/button"
         android:layout_marginTop="160dp"
         app:cornerRadius="8dp"
-        android:text="@string/register_title"
+        android:text="@string/crear_cuenta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/et_repeat_password"
         app:layout_constraintHorizontal_bias="0.0"

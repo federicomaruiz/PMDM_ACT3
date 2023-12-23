@@ -5,5 +5,9 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Ideas" parent="Base.Theme.Ideas" />
+    <style name="Theme.Ideas" parent="Base.Theme.Ideas">
+        <!-- ... Otros atributos del tema ... -->
+        <item name="android:windowBackground">@color/background_app</item>
+    </style>
+
 </resources>

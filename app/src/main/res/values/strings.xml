@@ -3,7 +3,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="crear_cuenta">Crear cuenta</string>
-    <string name="register_title">Crear cuenta</string>
     <string name="et_name">Nombre de usuario</string>
     <string name="et_passwd">Contraseña</string>
     <string name="et_repeat_passwd">Confirmar contraseña</string>
@@ -29,7 +28,7 @@
     <string name="terminado">Terminado</string>
     <string name="titulo_hint">Titulo</string>
     <string name="passwd_hint">Contraseña</string>
-    <string name="detalle_hint">Añadire detalle</string>
+    <string name="detalle_hint">Añadir detalle</string>
     <string name="btn_act_reg">Actualizar y regresar</string>
     <string name="btn_añadir">Añadir</string>
 

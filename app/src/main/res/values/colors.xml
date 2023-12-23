@@ -3,9 +3,14 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="back_card">#FBF6F1</color>
-    <color name="et_color">#F3E4CD</color>
+    <color name="et_color">#FFE6C4</color>
     <color name="btn_color">#976A27</color>
     <color name="btn_color_delte">#FB0505</color>
-    <color name="btn_add">#105913</color>
+    <color name="btn_add">#31B337</color>
+    <color name="background_app">#F0F0F0</color>
+    <color name="rojo">#8F0000</color>
+    <color name="verde">#128016</color>
+    <color name="amarillo">#BAA80A</color>
+
 
 </resources>
