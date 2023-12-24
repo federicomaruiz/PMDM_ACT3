@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="button">
         <item name="android:layout_height">55dp</item>
         <item name="android:layout_width">0dp</item>
@@ -12,6 +13,7 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
+
     <style name="titles">
         <item name="android:layout_width">297dp</item>
         <item name="android:layout_height">52dp</item>
@@ -21,6 +23,7 @@
         <item name="android:textAlignment">center</item>
         <item name="android:textSize">34sp</item>
     </style>
+
     <style name="edit_text">
         <item name="android:layout_width">0dp</item>
         <item name="android:radius">12dp</item>
@@ -32,6 +35,7 @@
         <item name="android:paddingBottom">15dp</item>
         <item name="android:background">@drawable/rectangle</item>
     </style>
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- ... Otros atributos del tema ... -->
         <item name="android:windowBackground">@color/background_app</item>
