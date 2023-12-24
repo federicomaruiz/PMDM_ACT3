@@ -27,6 +27,9 @@ class LoginFragment : Fragment() {
 
     private var userLogged: Boolean = false
 
+    private var isLoginButtonClickedUser = false
+    private var isLoginButtonClickedPasswd = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,9 +46,12 @@ class LoginFragment : Fragment() {
             goToRegister()
         }
         binding.btnLoginAcceder.setOnClickListener {
+            isLoginButtonClickedUser = true
+            isLoginButtonClickedPasswd = true
             doLogin()
         }
     }
+
 
     private fun checkUser() {
         lifecycleScope.launch(Dispatchers.IO) {
@@ -93,7 +99,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun showMessageUser(isNameValid: Boolean) {
-        if ((isNameValid != null && !isNameValid!!) && (!userLogged)) {
+        if ((isNameValid != null && !isNameValid!!) && (!userLogged) && isLoginButtonClickedUser) {
             lifecycleScope.launch(Dispatchers.Main) {
                 Toast.makeText(
                     requireContext(),
@@ -101,13 +107,12 @@ class LoginFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-
             userLogged = false
         }
     }
 
     private fun showMessagePasswd(isPasswordValid: Boolean) {
-        if ((isPasswordValid != null && !isPasswordValid!!) && (!userLogged)) {
+        if ((isPasswordValid != null && !isPasswordValid!!) && (!userLogged) && isLoginButtonClickedPasswd) {
             lifecycleScope.launch(Dispatchers.Main) {
                 Toast.makeText(
                     requireContext(),
@@ -133,6 +138,8 @@ class LoginFragment : Fragment() {
     private fun goToRegister() {
         val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
         findNavController().navigate(action)
+        isLoginButtonClickedPasswd = false
+        isLoginButtonClickedUser = false
     }
 
     // Guardo la sesion que el usuario esta logeado
