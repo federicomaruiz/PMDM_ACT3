@@ -52,7 +52,6 @@ class IdeaDetailFragment : Fragment() {
         obtainDetailRelation(args.itemId)
         checkTime()
         checkPriority()
-        binding.button.setOnClickListener { updateValue();navigateToBack() }
         binding.btnAddDetail.setOnClickListener { addDescription() }
     }
 
@@ -74,11 +73,6 @@ class IdeaDetailFragment : Fragment() {
         }
     }
 
-
-    private fun navigateToBack() {
-        val action = IdeaDetailFragmentDirections.actionIdeaDetailFragmentToIdeasListFragment()
-        findNavController().navigate(action)
-    }
 
     private fun obtainDetailRelation(itemId: Int) {
         val application: MyApplication = requireActivity().application as MyApplication
@@ -127,22 +121,19 @@ class IdeaDetailFragment : Fragment() {
         }
     }
 
-
-    private fun updateValue() {
-
+    private fun updateTime() {
         val application: MyApplication = requireActivity().application as MyApplication
         lifecycleScope.launch(Dispatchers.IO) {
             application.dataBase.ideasDao()
-                .updateIdeaTimeAndPriority(args.itemId, timeValue, priorityValue)
-
+                .updateIdeaTime(args.itemId, timeValue)
         }
+    }
 
+    private fun updatePriority() {
+        val application: MyApplication = requireActivity().application as MyApplication
         lifecycleScope.launch(Dispatchers.IO) {
-            // Actualiza los detalles en la tabla Detail
-            val details = detailDao.getDetailsByIdeaId(args.itemId)
-            for (detail in details) {
-                detailDao.updateDetail(detail)
-            }
+            application.dataBase.ideasDao()
+                .updateIdeaPriority(args.itemId, priorityValue)
         }
     }
 
@@ -166,6 +157,7 @@ class IdeaDetailFragment : Fragment() {
                 binding.cbDetailProceso.isChecked = false
                 binding.cbDetailTerminado.isChecked = false
                 timeValue = binding.cbDetailPendiente.text.toString()
+                updateTime()
             }
         }
 
@@ -174,6 +166,7 @@ class IdeaDetailFragment : Fragment() {
                 binding.cbDetailPendiente.isChecked = false
                 binding.cbDetailTerminado.isChecked = false
                 timeValue = binding.cbDetailProceso.text.toString()
+                updateTime()
             }
         }
 
@@ -182,6 +175,7 @@ class IdeaDetailFragment : Fragment() {
                 binding.cbDetailPendiente.isChecked = false
                 binding.cbDetailProceso.isChecked = false
                 timeValue = binding.cbDetailTerminado.text.toString()
+                updateTime()
 
             }
 
@@ -194,6 +188,7 @@ class IdeaDetailFragment : Fragment() {
                 binding.cbDetailMedia.isChecked = false
                 binding.cbDetailAlta.isChecked = false
                 priorityValue = binding.cbDetailBaja.text.toString()
+                updatePriority()
             }
         }
 
@@ -202,6 +197,7 @@ class IdeaDetailFragment : Fragment() {
                 binding.cbDetailBaja.isChecked = false
                 binding.cbDetailAlta.isChecked = false
                 priorityValue = binding.cbDetailMedia.text.toString()
+                updatePriority()
             }
         }
 
@@ -210,6 +206,7 @@ class IdeaDetailFragment : Fragment() {
                 binding.cbDetailBaja.isChecked = false
                 binding.cbDetailMedia.isChecked = false
                 priorityValue = binding.cbDetailAlta.text.toString()
+                updatePriority()
             }
 
         }

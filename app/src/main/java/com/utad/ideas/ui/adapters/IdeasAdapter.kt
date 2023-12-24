@@ -44,24 +44,24 @@ class IdeasAdapter(
     private fun setColors(item: Ideas, holder: IdeaListViewHolder) {
         if (item.priority == "Baja") {
             holder.binding.tvListPriority.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor("#128016"))
+                ColorStateList.valueOf(Color.parseColor("#88DF6A"))
         } else if (item.priority == "Media") {
             holder.binding.tvListPriority.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor("#BAA80A"))
+                ColorStateList.valueOf(Color.parseColor("#D1D958"))
         } else if (item.priority == "Alta") {
             holder.binding.tvListPriority.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor("#8F0000"))
+                ColorStateList.valueOf(Color.parseColor("#D25D44"))
         }
 
         if (item.time == "Pendiente") {
             holder.binding.tvListTime.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor("#8F0000"))
+                ColorStateList.valueOf(Color.parseColor("#D25D44"))
         } else if (item.time == "En proceso") {
             holder.binding.tvListTime.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor("#BAA80A"))
+                ColorStateList.valueOf(Color.parseColor("#D1D958"))
         } else if (item.time == "Terminado") {
             holder.binding.tvListTime.backgroundTintList =
-                ColorStateList.valueOf(Color.parseColor("#128016"))
+                ColorStateList.valueOf(Color.parseColor("#88DF6A"))
         }
     }
 

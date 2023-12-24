@@ -5,12 +5,11 @@
     <color name="back_card">#FBF6F1</color>
     <color name="et_color">#FFE6C4</color>
     <color name="btn_color">#976A27</color>
-    <color name="btn_color_delte">#FB0505</color>
+    <color name="btn_color_delte">#C3192D</color>
     <color name="btn_add">#31B337</color>
     <color name="background_app">#F0F0F0</color>
-    <color name="rojo">#8F0000</color>
-    <color name="verde">#128016</color>
-    <color name="amarillo">#BAA80A</color>
-
-
+    <color name="rojo">#FF847C</color>
+    <color name="verde">#B6EDC4</color>
+    <color name="amarillo">#A4C400</color>
+    <color name="background_card">#EBEBEB</color>
 </resources>

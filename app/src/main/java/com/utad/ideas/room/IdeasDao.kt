@@ -21,8 +21,14 @@ interface IdeasDao {
     @Query("UPDATE Ideas SET time = :newTime, priority = :newPriority WHERE id = :ideaId")
     fun updateIdeaTimeAndPriority(ideaId: Int, newTime: String, newPriority: String)
 
+    @Query("UPDATE Ideas SET time = :newTime WHERE id = :ideaId")
+    fun updateIdeaTime(ideaId: Int, newTime: String)
+
+    @Query("UPDATE Ideas SET priority = :newPriority WHERE id = :ideaId")
+    fun updateIdeaPriority(ideaId: Int, newPriority: String)
+
     @Query("SELECT * FROM ideas")
-    fun getAllIdeaList(): Flow <List<Ideas>>
+    fun getAllIdeaList(): Flow<List<Ideas>>
 
     @Query("SELECT * FROM Ideas WHERE id=:listId")
     fun getIdeaListDetail(listId: Int): Ideas

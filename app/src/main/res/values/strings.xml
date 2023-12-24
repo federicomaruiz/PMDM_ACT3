@@ -31,5 +31,7 @@
     <string name="detalle_hint">Añadir detalle</string>
     <string name="btn_act_reg">Actualizar y regresar</string>
     <string name="btn_añadir">Añadir</string>
+    <string name="new_idea">Nombre de tu idea</string>
+    <string name="new_idea_sobre">¿Sobre que trata?</string>
 
 </resources>
