@@ -16,37 +16,37 @@ import kotlinx.coroutines.flow.Flow
 interface IdeasDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveIdeaList(ideas: Ideas)
+    suspend fun saveIdeaList(ideas: Ideas)
 
     @Query("UPDATE Ideas SET time = :newTime, priority = :newPriority WHERE id = :ideaId")
-    fun updateIdeaTimeAndPriority(ideaId: Int, newTime: String, newPriority: String)
+    suspend fun updateIdeaTimeAndPriority(ideaId: Int, newTime: String, newPriority: String)
 
     @Query("UPDATE Ideas SET time = :newTime WHERE id = :ideaId")
     fun updateIdeaTime(ideaId: Int, newTime: String)
 
     @Query("UPDATE Ideas SET priority = :newPriority WHERE id = :ideaId")
-    fun updateIdeaPriority(ideaId: Int, newPriority: String)
+    suspend fun updateIdeaPriority(ideaId: Int, newPriority: String)
 
     @Query("SELECT * FROM ideas")
     fun getAllIdeaList(): Flow<List<Ideas>>
 
     @Query("SELECT * FROM Ideas WHERE id=:listId")
-    fun getIdeaListDetail(listId: Int): Ideas
+    suspend fun getIdeaListDetail(listId: Int): Ideas
 
 
     @Query("DELETE FROM Detail WHERE idIdeas = :ideaId")
-    fun deleteDetailsByIdeaId(ideaId: Int)
+    suspend fun deleteDetailsByIdeaId(ideaId: Int)
 
     @Transaction
     @Delete
-    fun deleteIdea(ideas: Ideas)
+    suspend fun deleteIdea(ideas: Ideas)
 
     /*
     * Cuando elimine una idea se eliminaran todos los detalles referenciados a ella
     * */
     @Transaction
     @Delete
-    fun deleteList(ideas: Ideas) {
+    suspend fun deleteList(ideas: Ideas) {
         deleteDetailsByIdeaId(ideas.id)
         deleteIdea(ideas)
     }

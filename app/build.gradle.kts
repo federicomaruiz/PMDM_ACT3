@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs") // safe args
-    id("kotlin-kapt") // Room
+    id("com.google.devtools.ksp") // Room
 
 }
 
@@ -37,14 +37,14 @@ android {
         jvmTarget = "1.8"
     }
 
-    viewBinding{
-        enable =  true
+    viewBinding {
+        enable = true
     }
 }
 
 dependencies {
 
-    implementation ("com.google.android.material:material:1.5.0")
+    implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
@@ -55,8 +55,7 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
 
 
-    testImplementation ("junit:junit:4.13.2")
-
+    testImplementation("junit:junit:4.13.2")
 
 
     // navigation
@@ -65,8 +64,8 @@ dependencies {
 
     //Data Store
 
-    implementation ("androidx.navigation:navigation-fragment-ktx:2.6.0")
-    implementation ("androidx.navigation:navigation-ui-ktx:2.6.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
 
     // data store
     implementation("androidx.datastore:datastore-preferences:1.0.0")
@@ -79,15 +78,11 @@ dependencies {
     val room_version = "2.5.0"
 
     implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
-    kapt("androidx.room:room-compiler:$room_version")
-    implementation ("androidx.room:room-ktx:$room_version")
+    ksp("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
 
 
-    implementation ("com.google.code.gson:gson:2.8.8")
-
-
-
+    implementation("com.google.code.gson:gson:2.8.8")
 
 
 }
